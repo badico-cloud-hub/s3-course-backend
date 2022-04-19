@@ -13,3 +13,5 @@ services:
     environment:
       - STAGE=dev 
       - PORT=8000
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
