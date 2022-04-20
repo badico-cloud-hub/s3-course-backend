@@ -9,7 +9,7 @@ COPY package.json .
 RUN npm install
 
 # Bundle app source
-COPY index.js ./
+COPY src ./
 
 # Exports
 EXPOSE 8000
