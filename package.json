@@ -1,13 +1,16 @@
 {
   "name": "badico-s3-backend",
+  "jest": {
+    "verbose": true
+  },
   "version": "1.0.0",
   "description": "a simple backend for the s3 badico course",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index",
+    "test": "jest",
+    "start": "node src/index",
     "start.dev": "nodemon -L",
-    "start.local": "STAGE=dev nodemon -L -r dotenv/config index.js dotenv_config_path=.env"
+    "start.local": "STAGE=dev nodemon -L -r dotenv/config src/index.js dotenv_config_path=.env"
   },
   "dependencies": {
     "aws-sdk": "^2.1116.0",
