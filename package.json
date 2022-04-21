@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index",
-    "start.dev": "nodemon -L",
-    "start.local": "STAGE=dev nodemon -L -r dotenv/config src/index.js dotenv_config_path=.env"
+    "start.dev": "nodemon -L -r dotenv/config src/index.js dotenv_config_path=.env"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
