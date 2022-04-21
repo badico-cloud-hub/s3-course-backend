@@ -2,6 +2,8 @@ const express = require('express')
 const morgan = require('morgan');
 const upload = require('./upload')
 
+const routes = express.Router();
+
 routes.get('/health', (req, res) => res.json({
   ok: true,
   env: process.env.STAGE,

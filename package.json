@@ -9,8 +9,7 @@
   "scripts": {
     "test": "jest",
     "start": "node src/index",
-    "start.dev": "nodemon -L",
-    "start.local": "STAGE=dev nodemon -L -r dotenv/config src/index.js dotenv_config_path=.env"
+    "start.dev": "nodemon -L -r dotenv/config src/index.js dotenv_config_path=.env"
   },
   "dependencies": {
     "aws-sdk": "^2.1116.0",
