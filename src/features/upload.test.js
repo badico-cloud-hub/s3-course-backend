@@ -1,5 +1,10 @@
-const upload = require('./upload');
+const storageStub = require('../services/storage.stub')
+const fakeRepository = require('../repositories/fake-repository')
+const upload = require('./upload')(fakeRepository, storageStub);
 
+afterEach(() => {
+  fakeRepository.clean()
+});
 
 test('test upload function', async () => {
   const fileName = "imagemTeste.png"
@@ -26,4 +31,15 @@ test('correct behavior for names with more than one dot', async () => {
   expect(result).toHaveProperty('extension', 'png')
 })
 
-
+test('it should create a new record', async () => {
+  const fileName = "newRecordTest.png"
+  await upload(fileName)
+  const allImages = fakeRepository.list()
+  expect(allImages).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        key: fileName
+      })
+    ])
+  )
+})
