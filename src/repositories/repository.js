@@ -8,12 +8,13 @@ module.exports = {
     })
     return newRecord
   },
-  delete: async function(imageId) {
+  delete: async function() {
     return true
   },
   list: async function() {
-    return true
+    return imageModel.find().lean()
   },
 }
+
 
 

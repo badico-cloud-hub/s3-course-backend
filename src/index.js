@@ -29,6 +29,17 @@ routes.post('/files', async (req, res) => {
   res.json(response)
 });
 
+routes.get('/files', async (req, res) => {
+  let response;
+  try {
+    response = await list()
+  } catch (e) {
+    console.error(e)
+    res.status(500).json({ message: e.message })
+  }
+  res.json(response)
+});
+
 const app = express()
 app.use(express.json());
 app.use(morgan('combined'));
