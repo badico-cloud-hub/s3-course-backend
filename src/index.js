@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 
 const storageService = require('./services/storage')
 const repository = require('./repositories/repository')
-
-const { upload } = require('./features')(repository, storageService)
-const { list } = require('./features')(repository)
+const { upload: uploadFactory, list: listFactory } = require('./features')
 
 const routes = express.Router();
+
+const upload = uploadFactory(repository, storageService)
+const list = listFactory(repository)
 
 routes.get('/health', (req, res) => res.json({
   ok: true,
