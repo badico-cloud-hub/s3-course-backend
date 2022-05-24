@@ -1,10 +1,8 @@
 const { v4: uuid } = require('uuid')
+const { getFileProps } = require('../utils')
 
 module.exports = (repository, storageService) => async (fileName) => {
-  const fileNameSplitted = fileName.split('.');
-  if (fileNameSplitted.length < 2) throw new Error('No file extension found')
-  const fileExtension = fileNameSplitted.pop();
-  const fileNameOnly = fileNameSplitted.join('.')
+  const { fileNameOnly, fileExtension } = getFileProps(fileName)
   const uuidAndName = `${uuid()}-${fileNameOnly}`
   const url = await storageService.getPutSignedUrl(uuidAndName, fileExtension)
   const newImageRecord = await repository.create({
