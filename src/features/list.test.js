@@ -1,5 +1,6 @@
 const fakeRepository = require('../repositories/fake-repository')
-const list = require('./list')(fakeRepository)
+const fakeStorageService = require('../services/storage.stub')
+const list = require('./list')(fakeRepository, fakeStorageService)
 
 afterEach(() => {
   fakeRepository.clean();
@@ -30,3 +31,15 @@ test('should bring urls ', async () => {
     ])
   )
 })
+
+test('should fire "getSignedUrl" method from storage service', async () => {
+  const spy = jest.spyOn(fakeStorageService, 'getSignedUrl')
+
+  fakeRepository.create({ key: 'firstImage.jpg' })
+  fakeRepository.create({ key: 'secondImage.jpg' })
+  fakeRepository.create({ key: 'thirdImage.jpg' })
+
+  await list()
+  expect(spy).toHaveBeenCalledTimes(3)
+})
+

@@ -1,9 +1,12 @@
 
-module.exports = (repository) => async () => {
+module.exports = (repository, storageService) => async () => {
   const allImages = await repository.list()
-  return allImages.map(image => ({
-    ...image,
-    url: `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${image.key}`
+  return Promise.all(allImages.map(async (image) => {
+    const url = await storageService.getSignedUrl(image.key)
+    return {
+      ...image,
+      url,
+    }
   }))
 }
 

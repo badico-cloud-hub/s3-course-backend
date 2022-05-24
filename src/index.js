@@ -1,6 +1,7 @@
 const express = require('express')
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const storageService = require('./services/storage')
 const repository = require('./repositories/repository')
@@ -9,7 +10,7 @@ const { upload: uploadFactory, list: listFactory } = require('./features')
 const routes = express.Router();
 
 const upload = uploadFactory(repository, storageService)
-const list = listFactory(repository)
+const list = listFactory(repository, storageService)
 
 routes.get('/health', (req, res) => res.json({
   ok: true,
@@ -41,6 +42,7 @@ routes.get('/files', async (req, res) => {
 });
 
 const app = express()
+app.use(cors());
 app.use(express.json());
 app.use(morgan('combined'));
 app.use(`/${process.env.STAGE}`, routes);

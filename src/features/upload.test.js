@@ -38,8 +38,10 @@ test('it should create a new record', async () => {
   expect(allImages).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
-        key: fileName
-      })
+        name: fileName,
+        key: expect.stringMatching(fileName)
+      }),
     ])
   )
+
 })

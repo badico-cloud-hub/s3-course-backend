@@ -4,7 +4,8 @@ module.exports = {
   create: async function(params) {
     if (!params.key) throw new Error("missing 'key' param")
     const newRecord = await imageModel.create({
-      key: params.key
+      key: params.key,
+      name: params.name
     })
     return newRecord
   },
@@ -12,7 +13,7 @@ module.exports = {
     return true
   },
   list: async function() {
-    return imageModel.find().lean()
+    return imageModel.find().sort({ "createdAt": -1 }).lean()
   },
 }
 
