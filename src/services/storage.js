@@ -58,7 +58,8 @@ module.exports = {
     }
     return s3_client.getSignedUrlPromise('putObject', params)
   },
-  getSignedUrl: async (fileKey) => cacheTool.getValue(fileKey)
+  getSignedUrl: async (fileKey) => cacheTool.getValue(fileKey),
+  generateNewCacheRecord
 }
 
 

@@ -1,7 +1,10 @@
 {
   "name": "badico-s3-backend",
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "setupFiles": [
+      "<rootDir>/test.env.vars.js"
+    ]
   },
   "version": "1.0.0",
   "description": "a simple backend for the s3 badico course",
